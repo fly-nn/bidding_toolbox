@@ -1,0 +1,32 @@
+---
+title: "bidding_toolbox"
+format: dashboard
+logo: images/skype_icon.png
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(ggtext)
+library(readxl)
+library(scales)
+library(DT)
+library(gt)
+library(gtExtras)
+library(glue)
+library(plotly)
+library(calendR)
+library(cellranger)
+library(airportr)
+library(leaflet)
+library(sf)
+# theme_set(theme_minimal(base_size = 24, base_family = "Atkinson Hyperlegible"))
+```
+
+# Page 1
+
+This is page 1.
