@@ -27,7 +27,7 @@ tjune_ops_sched %>%
 tjune_bid_clean <- tjune_ops_sched %>% 
   rename_with(~tolower(gsub(" ","_", .x))) %>% 
   filter(str_detect(schedule_type, "^7|^8"),
-         ! position %in% c("FA", "FACA", "FIOE")) %>% 
+         ! position %in% c("FA", "FACA", "FIOE", "NQPS", "NQC")) %>% 
   mutate(across(schedule_type, ~gsub("7 & 7 - ", "7&7_", .x)),
          across(schedule_type, ~gsub("8&6 - ", "8&6_", .x)),
          across(schedule_type, ~gsub(" W/Travel - ", "_", .x)),
@@ -38,8 +38,13 @@ tjune_bid_clean <- tjune_ops_sched %>%
                              line_num == 9 ~ "Weekend",
                              line_num == 10 ~ "Weekend",
                              TRUE ~ "Weekday"
-                              )
+                              ),
+         seat = case_when(position == "CA" ~ "PIC",
+                          position == "TR" ~ "PIC",
+                          position == "SIOE" ~ "SIC",
+                          TRUE ~ position)
          )
+
 
 View(tjune_bid_clean)
 
@@ -61,8 +66,8 @@ tseniority <- tseniority %>%
 
 tjune_bid_clean <- tjune_bid_clean %>% 
   left_join(tseniority, by = c("cmi" = "cmi")) %>% 
-  select(1:8, union_seniority) %>% 
-  rename(name = name.x)
+  select(1:9, union_seniority) %>% 
+  rename(name = name.x, seat = seat.x)
   
 
 ### Plot Construction ###
@@ -75,34 +80,133 @@ tjune_bid_clean %>%
          percent = label_percent(accuracy = 0.1)(count / sum(count))) %>%
   ggplot(aes(schedule_type, count))+
   geom_col(aes(fill = weekend))+
-  geom_text(aes(label = glue("{count} ({percent})")), vjust = -0.5)+ #fill = "steelblue", color = "#2C5171"
+  geom_text(aes(label = glue("{count} ({percent})")), vjust = -0.5)+
   theme_bw()+
   labs(x = "",
        y = "Count",
        title = "7&7 Line Distribution",
-       subtitle = "*All Fllets and Seats*",
+       subtitle = "*All Fleets and Seats*",
        fill = ""
        )+
   scale_fill_manual(values = c("steelblue", "#2C5171"))+
   theme(plot.title = element_markdown(),
         plot.subtitle = element_markdown()
         )
-  
 
-t8n6_all <- tjune_bid_clean %>% 
-  filter(str_detect(schedule_type, "^8")) %>% 
-  count(line_num, schedule_type, name = "count") %>% 
-  mutate(schedule_type = fct_reorder(schedule_type, line_num)) %>% 
+### Add Average Seniority ###
+
+tjune_bid_clean %>% 
+  filter(str_detect(schedule_type, "^7")) %>% 
+  group_by(line_num, schedule_type, weekend) %>% 
+  summarise(count = n(),
+            avg_snrty = mean(union_seniority, na.rm = T),
+            .groups = "drop"
+            ) %>% 
+  mutate(schedule_type = fct_reorder(schedule_type, line_num),
+         percent = label_percent(accuracy = 0.1)(count / sum(count)),
+         avg_snrty = format(round(avg_snrty, 0), big.mark = ",")) %>%
   ggplot(aes(schedule_type, count))+
-  geom_col(fill = "steelblue", color = "#2C5171")+
-  geom_text(aes(label = count), vjust = -0.5)+
+  geom_col(aes(fill = weekend))+
+  geom_text(aes(label = glue("{count} ({percent})")), vjust = -0.5)+
+  geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
+            vjust = 1.3,
+            color = "white")+
   theme_bw()+
   labs(x = "",
        y = "Count",
-       title = "8&6 Line Distribution",
-       subtitle = "*All Fllets and Seats*"
+       title = "7&7 Line Distribution",
+       subtitle = "*All Fleets and Seats*",
+       fill = ""
   )+
+  scale_fill_manual(values = c("steelblue", "#2C5171"))+
   theme(plot.title = element_markdown(),
-        plot.subtitle = element_markdown())
+        plot.subtitle = element_markdown()
+  )
 
-            
+### Weekend v Weekday Summary ###
+
+tjune_bid_clean %>% 
+  filter(str_detect(schedule_type, "^7")) %>% 
+  count(weekend, name = "count") %>% 
+  mutate(percent = label_percent(accuracy = 0.1)(count / sum(count))) %>% 
+  ggplot(aes(weekend, count))+
+  geom_col(aes(fill = weekend), legend = F)+
+  geom_text(aes(label = glue("{count} ({percent})")), hjust = 1.1, color = "white" )+ #fill = "steelblue", color = "#2C5171"
+  theme_bw()+
+  labs(x = "",
+       y = "Count",
+       title = "7&7 Weekend to Weekday Ratio",
+       subtitle = "*All Fleets and Seats*",
+       fill = ""
+  )+
+  scale_fill_manual(values = c("steelblue", "#2C5171"))+
+  theme(plot.title = element_markdown(),
+        plot.subtitle = element_markdown(),
+        legend.position = "none"
+  )+
+  coord_flip()
+  
+tjune_bid_clean %>% 
+  filter(str_detect(schedule_type, "^8")) %>% 
+  count(weekend, name = "count") %>% 
+  mutate(percent = label_percent(accuracy = 0.1)(count / sum(count))) %>% 
+  ggplot(aes(weekend, count))+
+  geom_col(aes(fill = weekend), legend = F)+
+  geom_text(aes(label = glue("{count} ({percent})")), hjust = 1.1, color = "white" )+ #fill = "steelblue", color = "#2C5171"
+  theme_bw()+
+  labs(x = "",
+       y = "Count",
+       title = "8&6 Weekend to Weekday Ratio",
+       subtitle = "*All Fleets and Seats*",
+       fill = ""
+  )+
+  scale_fill_manual(values = c("steelblue", "#2C5171"))+
+  theme(plot.title = element_markdown(),
+        plot.subtitle = element_markdown(),
+        legend.position = "none"
+  )+
+  coord_flip()
+
+### Fleet and Seat ###
+
+## Variables ##
+
+sched_filter <- as.list(c("^7", "^8"))
+fleet_list <- as.list(unique(tjune_bid_clean$fleet))
+seat_list <- as.list(unique(tjune_bid_clean$seat))
+
+fline_distribution <- function(schedx, seatx, fleetx){
+
+tjune_bid_clean %>% 
+  filter(str_detect(schedule_type, schedx),
+         fleet == fleetx,
+         seat == seatx) %>% 
+  group_by(line_num, schedule_type, weekend) %>% 
+  summarise(count = n(),
+            avg_snrty = mean(union_seniority, na.rm = T),
+            .groups = "drop") %>% 
+  mutate(schedule_type = fct_reorder(schedule_type, line_num),
+         percent = label_percent(accuracy = 0.1)(count / sum(count)),
+         avg_snrty = format(round(avg_snrty, 0), big.mark = ",")) %>%
+  ggplot(aes(schedule_type, count))+
+  geom_col(aes(fill = weekend))+
+  geom_text(aes(label = glue("{count} ({percent})")), vjust = -0.5)+
+  geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
+            vjust = 1.3,
+            color = "white")+
+  theme_bw()+
+  labs(x = "",
+       y = "Count",
+       title = glue("7&7 Line Distribution"),
+       subtitle = glue("*{fleetx} {seatx}*"),
+       fill = ""
+  )+
+  scale_fill_manual(values = c("steelblue", "#2C5171"))+
+  theme(plot.title = element_markdown(),
+        plot.subtitle = element_markdown()
+  )
+ 
+}
+
+fline_distribution("^7", "PIC", "CE-680AS")
+
