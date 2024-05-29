@@ -316,3 +316,12 @@ library(ggtext)
 
 ##### 13
 ![](images/2025_prod/8_6_Line_13.png)
+
+# Seam Example {orientation="columns" scrolling="false"}
+
+## column {width="60%"}
+
+![](images/Wednesday Start Seam Table A copy.png)
+
+## column {width="30%"}
+
