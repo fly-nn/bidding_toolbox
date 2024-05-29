@@ -317,62 +317,41 @@ library(ggtext)
 ##### 13
 ![](images/2025_prod/8_6_Line_13.png)
 
-# Seam Tables
+# Seam Tables {orientation="columns"}
 
 ## row {.tabset}
 
 ### Example
-[](images/seam_tables/Example Table.pdf)
-```{=html}
-<object data="images/seam_tables/Example Table.pdf" type="application/pdf" width="70%" height="100%" style="min-height:100vh;">
-</object>
-```
+
+![](images/seam_tables/Example Table.png)
 
 ### Monday Starts
-[](images/seam_tables/Seam Tables A Monday.pdf)
-
-```{=html}
-<object data="images/seam_tables/Seam Tables A Monday.pdf" type="application/pdf" width="70%" height="100%" style="min-height:100vh;">
-</object>
-```
+![](images/seam_tables/Seam Tables A Monday_Part1.png)
+![](images/seam_tables/Seam Tables A Monday_Part2.png)
+![](images/seam_tables/Seam Tables A Monday_Part3.png)
+![](images/seam_tables/Seam Tables A Monday_Part4.png)
 
 ### Tuesday Starts
-[](images/seam_tables/Seam Tables A Tuesday.pdf)
-
-```{=html}
-<object data="images/seam_tables/Seam Tables A Tuesday.pdf" type="application/pdf" width="70%" height="100%" style="min-height:100vh;">
-</object>
-```
+![](images/seam_tables/Seam Tables A Tuesday_Part1.png)
+![](images/seam_tables/Seam Tables A Tuesday_Part2.png)
 
 ### Wednesday Starts
-[](images/seam_tables/Seam Tables A Wednesday.pdf)
-
-```{=html}
-<object data="images/seam_tables/Seam Tables A Wednesday.pdf" type="application/pdf" width="70%" height="100%" style="min-height:100vh;">
-</object>
-```
+![](images/seam_tables/Seam Tables A Wednesday_Part1.png)
+![](images/seam_tables/Seam Tables A Wednesday_Part2.png)
+![](images/seam_tables/Seam Tables A Wednesday_Part3.png)
+![](images/seam_tables/Seam Tables A Wednesday_Part4.png)
 
 ### Thursday Starts
-[](images/seam_tables/Seam Tables A Thursday.pdf)
-
-```{=html}
-<object data="images/seam_tables/Seam Tables A Thursday.pdf" type="application/pdf" width="70%" height="100%" style="min-height:100vh;">
-</object>
-```
+![](images/seam_tables/Seam Tables A Thursday_Part1.png)
+![](images/seam_tables/Seam Tables A Thursday_Part2.png)
 
 ### Saturday Starts
-[](images/seam_tables/Seam Tables A Saturday.pdf)
-
-```{=html}
-<object data="images/seam_tables/Seam Tables A Saturday.pdf" type="application/pdf" width="70%" height="100%" style="min-height:100vh;">
-</object>
-```
+![](images/seam_tables/Seam Tables A Saturday_Part1.png)
+![](images/seam_tables/Seam Tables A Saturday_Part2.png)
+![](images/seam_tables/Seam Tables A Saturday_Part3.png)
+![](images/seam_tables/Seam Tables A Saturday_Part4.png)
 
 ### Sunday Starts
-[](images/seam_tables/Seam Tables A Sunday.pdf)
-
-```{=html}
-<object data="images/seam_tables/Seam Tables A Sunday.pdf" type="application/pdf" width="70%" height="100%" style="min-height:100vh;">
-</object>
-```
+![](images/seam_tables/Seam Tables A Sunday_Part1.png)
+![](images/seam_tables/Seam Tables A Sunday_Part2.png)
 
