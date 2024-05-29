@@ -109,9 +109,9 @@ tjune_bid_clean %>%
   ggplot(aes(schedule_type, count))+
   geom_col(aes(fill = weekend))+
   geom_text(aes(label = glue("{count} ({percent})")), vjust = -0.5)+
-  geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
-            vjust = 1.3,
-            color = "white")+
+  # geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
+  #           vjust = 1.3,
+  #           color = "white")+
   theme_bw()+
   labs(x = "",
        y = "Count",
@@ -124,15 +124,17 @@ tjune_bid_clean %>%
         plot.subtitle = element_markdown(),
         panel.grid.major = element_blank(),
         panel.border = element_blank(),
-        axis.line = element_line(color = "black")
+        axis.line = element_line(color = "black"),
+        legend.position = "top",
+        #legend.direction =  "horizontal"
   )
 
-ggsave("7_7_Global_Line_Dist_Snrty.tiff", path = "images",
-       width = 2000,
-       height = 1200,
+ggsave("7_7_Global_Line_Dist_Snrty.png", path = "images",
+       width = 2360,
+       height = 1640,
        units =c("px"),
        device = NULL,
-       dpi = 200)
+       dpi = 216)
 
  ## 8&6 ##
 
@@ -149,9 +151,9 @@ tjune_bid_clean %>%
   ggplot(aes(schedule_type, count))+
   geom_col(aes(fill = weekend))+
   geom_text(aes(label = glue("{count} ({percent})")), vjust = -0.5)+
-  geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
-            vjust = 1.3,
-            color = "white")+
+  # geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
+  #           vjust = 1.3,
+  #           color = "white")+
   theme_bw()+
   labs(x = "",
        y = "Count",
@@ -164,15 +166,17 @@ tjune_bid_clean %>%
         plot.subtitle = element_markdown(),
         panel.grid.major = element_blank(),
         panel.border = element_blank(),
-        axis.line = element_line(color = "black")
+        axis.line = element_line(color = "black"),
+        legend.position = "top",
+        #legend.direction =  "horizontal"
   )
 
-ggsave("8_6_Global_Line_Dist_Snrty.tiff", path = "images",
-       width = 2000,
-       height = 1200,
+ggsave("8_6_Global_Line_Dist_Snrty.png", path = "images",
+       width = 2360,
+       height = 1640,
        units =c("px"),
        device = NULL,
-       dpi = 200)
+       dpi = 216)
 
 ### Weekend v Weekday Summary ###
 
@@ -224,6 +228,8 @@ tjune_bid_clean %>%
 
 ### Fleet and Seat ###
 
+## Table to Pass to Function ##
+
 tfunction_variables <- tjune_bid_clean %>% 
   select(schedule_type, seat, fleet) %>% 
   mutate(schedx = ifelse(str_detect(schedule_type, "^7"), "^7", "^8"),
@@ -234,11 +240,11 @@ tfunction_variables <- tjune_bid_clean %>%
   select(schedx, seatx, fleetx)
 
 
-## Variables ##
+## Function ##
 
-sched_filter <- as.list(c("^7", "^8"))
-fleet_list <- as.list(unique(tjune_bid_clean$fleet))
-seat_list <- as.list(unique(tjune_bid_clean$seat))
+# sched_filter <- as.list(c("^7", "^8"))
+# fleet_list <- as.list(unique(tjune_bid_clean$fleet))
+# seat_list <- as.list(unique(tjune_bid_clean$seat))
 
 fline_distribution <- function(schedx, seatx, fleetx){
   
@@ -258,9 +264,9 @@ tjune_bid_clean %>%
   ggplot(aes(schedule_type, count))+
   geom_col(aes(fill = weekend))+
   geom_text(aes(label = glue("{count} ({percent})")), vjust = -0.5)+
-  geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
-            vjust = 1.3,
-            color = "white")+
+  # geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
+  #           vjust = 1.3,
+  #           color = "white")+
   theme_bw()+
   labs(x = "",
        y = "Count",
@@ -270,19 +276,23 @@ tjune_bid_clean %>%
   )+
   scale_fill_manual(values = c("steelblue", "#2C5171"))+
   theme(plot.title = element_markdown(),
-        plot.subtitle = element_markdown()
+        plot.subtitle = element_markdown(),
+        panel.border = element_blank(),
+        axis.line = element_line(color = "black"),
+        legend.position = "top",
+        #legend.direction =  "horizontal"
   )
   
-  ggsave(glue("{line_type}_{fleetx}_{seatx}.tiff"), path = "images/Line_Dists",
-         width = 3024,
-         height = 1964,
+  ggsave(glue("{line_type}_{fleetx}_{seatx}.png"), path = "images/Line_Dists",
+         width = 2360,
+         height = 1640,
          units =c("px"),
          device = NULL,
-         dpi = 254)
+         dpi = 216)
  
 }
 
-fline_distribution("^7", "PIC", "CE-680AS")
+fline_distribution("^7", "PIC", "CE-680")
 
 tfunction_variables %>% 
   pmap_chr(fline_distribution)

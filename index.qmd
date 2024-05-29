@@ -19,8 +19,174 @@ library(glue)
 library(ggtext)
 ```
 
-# Schedule Dist (Whole)
+# Schedule Dist (All Fleets)
 
-![](images/7_7_Global_Line_Dist_Snrty.tiff)
+## row {.tabset}
 
-![](images/8_6_Global_Line_Dist_Snrty.tiff)
+### 7&7
+
+![](images/7_7_Global_Line_Dist_Snrty.png)
+
+### 8&6
+
+![](images/8_6_Global_Line_Dist_Snrty.png)
+
+# 7&7 PIC
+
+## row {.tabset}
+
+### CE-560XL
+
+![](images/Line_Dists/7&7_CE-560XL_PIC.png)
+
+### CE-680
+
+![](images/Line_Dists/7&7_CE-680_PIC.png)
+
+### CE-680AS
+
+![](images/Line_Dists/7&7_CE-680AS_PIC.png)
+
+### CE-700
+
+![](images/Line_Dists/7&7_CE-700_PIC.png)
+
+### CL-350S
+
+![](images/Line_Dists/7&7_CL-350S_PIC.png)
+
+### CL-650S
+
+![](images/Line_Dists/7&7_CL-650S_PIC.png)
+
+### EMB-505S
+
+![](images/Line_Dists/7&7_EMB-505S_PIC.png)
+
+### GL6000S
+
+![](images/Line_Dists/7&7_GL6000S_PIC.png)
+
+### GL7500
+
+![](images/Line_Dists/7&7_GL7500_PIC.png)
+
+# 7&7 SIC
+
+## row {.tabset}
+
+### CE-560XL
+
+![](images/Line_Dists/7&7_CE-560XL_SIC.png)
+
+### CE-680
+
+![](images/Line_Dists/7&7_CE-680_SIC.png)
+
+### CE-680AS
+
+![](images/Line_Dists/7&7_CE-680AS_SIC.png)
+
+### CE-700
+
+![](images/Line_Dists/7&7_CE-700_SIC.png)
+
+### CL-350S
+
+![](images/Line_Dists/7&7_CL-350S_SIC.png)
+
+### CL-650S
+
+![](images/Line_Dists/7&7_CL-650S_SIC.png)
+
+### EMB-505S
+
+![](images/Line_Dists/7&7_EMB-505S_SIC.png)
+
+### GL6000S
+
+![](images/Line_Dists/7&7_GL6000S_SIC.png)
+
+### GL7500
+
+![](images/Line_Dists/7&7_GL7500_SIC.png)
+
+# 8&6 PIC
+
+## row {.tabset}
+
+### CE-560XL
+
+![](images/Line_Dists/8&6_CE-560XL_PIC.png)
+
+### CE-680
+
+![](images/Line_Dists/8&6_CE-680_PIC.png)
+
+### CE-680AS
+
+![](images/Line_Dists/8&6_CE-680AS_PIC.png)
+
+### CE-700
+
+![](images/Line_Dists/8&6_CE-700_PIC.png)
+
+### CL-350S
+
+![](images/Line_Dists/8&6_CL-350S_PIC.png)
+
+### CL-650S
+
+![](images/Line_Dists/8&6_CL-650S_PIC.png)
+
+### EMB-505S
+
+![](images/Line_Dists/8&6_EMB-505S_PIC.png)
+
+### GL6000S
+
+![](images/Line_Dists/8&6_GL6000S_PIC.png)
+
+### GL7500
+
+![](images/Line_Dists/8&6_GL7500_PIC.png)
+
+# 8&6 SIC
+
+## row {.tabset}
+
+### CE-560XL
+
+![](images/Line_Dists/8&6_CE-560XL_SIC.png)
+
+### CE-680
+
+![](images/Line_Dists/8&6_CE-680_SIC.png)
+
+### CE-680AS
+
+![](images/Line_Dists/8&6_CE-680AS_SIC.png)
+
+### CE-700
+
+![](images/Line_Dists/8&6_CE-700_SIC.png)
+
+### CL-350S
+
+![](images/Line_Dists/8&6_CL-350S_SIC.png)
+
+### CL-650S
+
+![](images/Line_Dists/8&6_CL-650S_SIC.png)
+
+### EMB-505S
+
+![](images/Line_Dists/8&6_EMB-505S_SIC.png)
+
+### GL6000S
+
+![](images/Line_Dists/8&6_GL6000S_SIC.png)
+
+### GL7500
+
+![](images/Line_Dists/8&6_GL7500_SIC.png)
