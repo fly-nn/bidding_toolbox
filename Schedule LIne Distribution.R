@@ -121,17 +121,20 @@ tjune_bid_clean %>%
   )+
   scale_fill_manual(values = c("steelblue", "#2C5171"))+
   theme(plot.title = element_markdown(),
-        plot.subtitle = element_markdown()
+        plot.subtitle = element_markdown(),
+        panel.grid.major = element_blank(),
+        panel.border = element_blank(),
+        axis.line = element_line(color = "black")
   )
 
 ggsave("7_7_Global_Line_Dist_Snrty.tiff", path = "images",
-       width = 3024,
-       height = 1964,
+       width = 2000,
+       height = 1200,
        units =c("px"),
        device = NULL,
-       dpi = 254)
+       dpi = 200)
 
-## 8&6 ##
+ ## 8&6 ##
 
 tjune_bid_clean %>% 
   filter(str_detect(schedule_type, "^8")) %>% 
@@ -158,15 +161,18 @@ tjune_bid_clean %>%
   )+
   scale_fill_manual(values = c("steelblue", "#2C5171"))+
   theme(plot.title = element_markdown(),
-        plot.subtitle = element_markdown()
+        plot.subtitle = element_markdown(),
+        panel.grid.major = element_blank(),
+        panel.border = element_blank(),
+        axis.line = element_line(color = "black")
   )
 
 ggsave("8_6_Global_Line_Dist_Snrty.tiff", path = "images",
-       width = 3024,
-       height = 1964,
+       width = 2000,
+       height = 1200,
        units =c("px"),
        device = NULL,
-       dpi = 254)
+       dpi = 200)
 
 ### Weekend v Weekday Summary ###
 
@@ -218,6 +224,16 @@ tjune_bid_clean %>%
 
 ### Fleet and Seat ###
 
+tfunction_variables <- tjune_bid_clean %>% 
+  select(schedule_type, seat, fleet) %>% 
+  mutate(schedx = ifelse(str_detect(schedule_type, "^7"), "^7", "^8"),
+         seatx = seat,
+         fleetx = fleet) %>% 
+  group_by(schedx, seatx, fleetx) %>%
+  count() %>% 
+  select(schedx, seatx, fleetx)
+
+
 ## Variables ##
 
 sched_filter <- as.list(c("^7", "^8"))
@@ -225,6 +241,8 @@ fleet_list <- as.list(unique(tjune_bid_clean$fleet))
 seat_list <- as.list(unique(tjune_bid_clean$seat))
 
 fline_distribution <- function(schedx, seatx, fleetx){
+  
+line_type <- ifelse(schedx == "^7", "7&7", "8&6")
 
 tjune_bid_clean %>% 
   filter(str_detect(schedule_type, schedx),
@@ -246,7 +264,7 @@ tjune_bid_clean %>%
   theme_bw()+
   labs(x = "",
        y = "Count",
-       title = glue("7&7 Line Distribution"),
+       title = glue("{line_type} Line Distribution"),
        subtitle = glue("*{fleetx} {seatx}*"),
        fill = ""
   )+
@@ -254,8 +272,17 @@ tjune_bid_clean %>%
   theme(plot.title = element_markdown(),
         plot.subtitle = element_markdown()
   )
+  
+  ggsave(glue("{line_type}_{fleetx}_{seatx}.tiff"), path = "images/Line_Dists",
+         width = 3024,
+         height = 1964,
+         units =c("px"),
+         device = NULL,
+         dpi = 254)
  
 }
 
 fline_distribution("^7", "PIC", "CE-680AS")
 
+tfunction_variables %>% 
+  pmap_chr(fline_distribution)

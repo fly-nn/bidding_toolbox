@@ -11,22 +11,16 @@ editor_options:
 #| message: false
 
 library(tidyverse)
-library(ggtext)
 library(readxl)
+library(ggplot2)
 library(scales)
-library(DT)
-library(gt)
-library(gtExtras)
+library(lubridate)
 library(glue)
-library(plotly)
-library(calendR)
-library(cellranger)
-library(airportr)
-library(leaflet)
-library(sf)
-# theme_set(theme_minimal(base_size = 24, base_family = "Atkinson Hyperlegible"))
+library(ggtext)
 ```
 
-# Page 1
+# Schedule Dist (Whole)
 
-This is page 1.
+![](images/7_7_Global_Line_Dist_Snrty.tiff)
+
+![](images/8_6_Global_Line_Dist_Snrty.tiff)
