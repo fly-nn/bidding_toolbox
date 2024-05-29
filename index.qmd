@@ -317,11 +317,62 @@ library(ggtext)
 ##### 13
 ![](images/2025_prod/8_6_Line_13.png)
 
-# Seam Example {orientation="columns" scrolling="false"}
+# Seam Tables
 
-## column {width="60%"}
+## row {.tabset}
 
-![](images/Wednesday Start Seam Table A copy.png)
+### Example
+[](images/seam_tables/Example Table.pdf)
+```{=html}
+<object data="images/seam_tables/Example Table.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+</object>
+```
 
-## column {width="30%"}
+### Monday Starts
+[](images/seam_tables/Seam Tables A Monday.pdf)
+
+```{=html}
+<object data="images/seam_tables/Seam Tables A Monday.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+</object>
+```
+
+### Tuesday Starts
+[](images/seam_tables/Seam Tables A Tuesday.pdf)
+
+```{=html}
+<object data="images/seam_tables/Seam Tables A Tuesday.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+</object>
+```
+
+### Wednesday Starts
+[](images/seam_tables/Seam Tables A Wednesday.pdf)
+
+```{=html}
+<object data="images/seam_tables/Seam Tables A Wednesday.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+</object>
+```
+
+### Thursday Starts
+[](images/seam_tables/Seam Tables A Thursday.pdf)
+
+```{=html}
+<object data="images/seam_tables/Seam Tables A Thursday.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+</object>
+```
+
+### Saturday Starts
+[](images/seam_tables/Seam Tables A Saturday.pdf)
+
+```{=html}
+<object data="images/seam_tables/Seam Tables A Saturday.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+</object>
+```
+
+### Sunday Starts
+[](images/seam_tables/Seam Tables A Sunday.pdf)
+
+```{=html}
+<object data="images/seam_tables/Seam Tables A Sunday.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+</object>
+```
 
