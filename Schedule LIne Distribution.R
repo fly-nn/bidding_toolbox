@@ -48,7 +48,7 @@ tjune_bid_clean <- tjune_ops_sched %>%
 
 View(tjune_bid_clean)
 
-### Seiority List Import and Clean ###
+### Seniority List Import and Clean ###
 
 seniority_file <- dir(path = "~/OneDrive - NJASAP/Documents/Seniority Related/Seniority List - Union/2024",
                       full.names = T,
@@ -71,6 +71,7 @@ tjune_bid_clean <- tjune_bid_clean %>%
   
 
 ### Plot Construction ###
+## 7&7 ##
 
 #t7n7_all <- 
 tjune_bid_clean %>% 
@@ -123,7 +124,53 @@ tjune_bid_clean %>%
         plot.subtitle = element_markdown()
   )
 
+ggsave("7_7_Global_Line_Dist_Snrty.tiff", path = "images",
+       width = 3024,
+       height = 1964,
+       units =c("px"),
+       device = NULL,
+       dpi = 254)
+
+## 8&6 ##
+
+tjune_bid_clean %>% 
+  filter(str_detect(schedule_type, "^8")) %>% 
+  group_by(line_num, schedule_type, weekend) %>% 
+  summarise(count = n(),
+            avg_snrty = mean(union_seniority, na.rm = T),
+            .groups = "drop"
+  ) %>% 
+  mutate(schedule_type = fct_reorder(schedule_type, line_num),
+         percent = label_percent(accuracy = 0.1)(count / sum(count)),
+         avg_snrty = format(round(avg_snrty, 0), big.mark = ",")) %>%
+  ggplot(aes(schedule_type, count))+
+  geom_col(aes(fill = weekend))+
+  geom_text(aes(label = glue("{count} ({percent})")), vjust = -0.5)+
+  geom_text(aes(label = glue("Avg. Snrty\n{avg_snrty}")),
+            vjust = 1.3,
+            color = "white")+
+  theme_bw()+
+  labs(x = "",
+       y = "Count",
+       title = "8&6 Line Distribution",
+       subtitle = "*All Fleets and Seats*",
+       fill = ""
+  )+
+  scale_fill_manual(values = c("steelblue", "#2C5171"))+
+  theme(plot.title = element_markdown(),
+        plot.subtitle = element_markdown()
+  )
+
+ggsave("8_6_Global_Line_Dist_Snrty.tiff", path = "images",
+       width = 3024,
+       height = 1964,
+       units =c("px"),
+       device = NULL,
+       dpi = 254)
+
 ### Weekend v Weekday Summary ###
+
+## 7&7 ##
 
 tjune_bid_clean %>% 
   filter(str_detect(schedule_type, "^7")) %>% 
@@ -145,13 +192,15 @@ tjune_bid_clean %>%
         legend.position = "none"
   )+
   coord_flip()
+
+## 8&6 ##
   
 tjune_bid_clean %>% 
   filter(str_detect(schedule_type, "^8")) %>% 
   count(weekend, name = "count") %>% 
   mutate(percent = label_percent(accuracy = 0.1)(count / sum(count))) %>% 
   ggplot(aes(weekend, count))+
-  geom_col(aes(fill = weekend), legend = F)+
+  geom_col(aes(fill = weekend), show.legend = F)+
   geom_text(aes(label = glue("{count} ({percent})")), hjust = 1.1, color = "white" )+ #fill = "steelblue", color = "#2C5171"
   theme_bw()+
   labs(x = "",
