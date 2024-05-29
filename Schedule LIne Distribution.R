@@ -242,10 +242,6 @@ tfunction_variables <- tjune_bid_clean %>%
 
 ## Function ##
 
-# sched_filter <- as.list(c("^7", "^8"))
-# fleet_list <- as.list(unique(tjune_bid_clean$fleet))
-# seat_list <- as.list(unique(tjune_bid_clean$seat))
-
 fline_distribution <- function(schedx, seatx, fleetx){
   
 line_type <- ifelse(schedx == "^7", "7&7", "8&6")

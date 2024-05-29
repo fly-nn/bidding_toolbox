@@ -1,5 +1,5 @@
 ---
-title: "bidding_toolbox"
+title: "NJASAP Bidding Aid"
 format: dashboard
 logo: images/skype_icon.png
 editor_options: 
