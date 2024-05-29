@@ -1,2 +1,4 @@
 /.quarto/
 .Rproj.user
+large_files
+.DS_Store
