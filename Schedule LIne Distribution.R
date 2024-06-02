@@ -130,11 +130,11 @@ tjune_bid_clean %>%
   )
 
 ggsave("7_7_Global_Line_Dist_Snrty.png", path = "images",
-       width = 2360,
-       height = 1640,
+       width = 1888,
+       height = 900,
        units =c("px"),
        device = NULL,
-       dpi = 216)
+       dpi = 173)
 
  ## 8&6 ##
 
@@ -172,11 +172,11 @@ tjune_bid_clean %>%
   )
 
 ggsave("8_6_Global_Line_Dist_Snrty.png", path = "images",
-       width = 2360,
-       height = 1640,
+       width = 1888,
+       height = 900,
        units =c("px"),
        device = NULL,
-       dpi = 216)
+       dpi = 173)
 
 ### Weekend v Weekday Summary ###
 
@@ -280,11 +280,11 @@ tjune_bid_clean %>%
   )
   
   ggsave(glue("{line_type}_{fleetx}_{seatx}.png"), path = "images/Line_Dists",
-         width = 2360,
-         height = 1640,
+         width = 1888,
+         height = 900,
          units =c("px"),
          device = NULL,
-         dpi = 216)
+         dpi = 173)
  
 }
 
