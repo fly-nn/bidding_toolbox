@@ -9,7 +9,7 @@ library(ggtext)
 ### Ops Schedule Import & Clean ###
 ops_sched_file <- dir(path = "~/OneDrive - NJASAP/Documents/Operational Schedules/Ops Schedules Merge PowerQuery/2021",
                        full.names = T,
-                       pattern = "2024-06 All Fleets.*\\.xlsx$")
+                       pattern = "2025-06 All Fleets.*\\.xlsx$")
 
 tjune_ops_sched <- read_excel(ops_sched_file,
                           sheet = "Sheet1",
@@ -50,9 +50,9 @@ View(tjune_bid_clean)
 
 ### Seniority List Import and Clean ###
 
-seniority_file <- dir(path = "~/OneDrive - NJASAP/Documents/Seniority Related/Seniority List - Union/2024",
+seniority_file <- dir(path = "~/OneDrive - NJASAP/Documents/Seniority Related/Seniority List - Union/2025",
                       full.names = T,
-                      pattern = "2024-05.*\\.xlsx$")
+                      pattern = "2025-04.*\\.xlsx$")
 
 tseniority <- read_excel(seniority_file,
                          sheet = "UNION_EXCEL_FILE",
@@ -60,14 +60,16 @@ tseniority <- read_excel(seniority_file,
 )
 
 tseniority <- tseniority %>% 
-  rename_with(~tolower(gsub(" ","_",.x)))
+  rename_with(~tolower(gsub(" ","_",.x))) %>% 
+  mutate(cmi = as.numeric(cmi))
+
 
 ### Join to Add Seniority ###
 
 tjune_bid_clean <- tjune_bid_clean %>% 
   left_join(tseniority, by = c("cmi" = "cmi")) %>% 
-  select(1:9, union_seniority) %>% 
-  rename(name = name.x, seat = seat.x)
+  select(1:9, union_seniority.x) %>% 
+  rename(name = name.x, seat = seat.x, union_seniority = union_seniority.x)
   
 
 ### Plot Construction ###

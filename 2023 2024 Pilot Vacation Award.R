@@ -9,10 +9,11 @@ library(DT)
 
 ### Imoort Vacation Spreadsheet ###
 
-vacation_award_file <- read_excel("~/OneDrive - NJASAP/_Action NJASAP/2023 - 2024 Pilot Vacation Awards 7.21.23.xlsx", 
+vacation_award_file <- read_excel("~/OneDrive - NJASAP/_Action NJASAP/2024 - 2025 Pilot Vacation Awards PQ Build.xlsx", 
                                                        sheet = "tVacaAward")
 vacation_award <- vacation_award_file %>% 
   rename_with(~tolower(gsub(" ","_", .x))) %>% 
+  rename(seniority = "sen#") %>% 
   mutate(start_date = as.Date(start_date), end_date = as.Date(end_date),
          fleet = ifelse(fleet == "CE-680", "CE-680x", fleet))
 
@@ -37,9 +38,9 @@ vacation_award_join <- vacation_award %>%
 ### Build Award Datatable ###
 
 vacation_award_join %>% 
-  select(-end_date, -week_number) %>% 
+  select(-name, -end_date, -week_number) %>% 
   datatable(
-    colnames = c("Name", "Senioirty", "Fleet", "Seat", "Week", "Start Date",
+    colnames = c("Senioirty", "Fleet", "Seat", "Week", "Start Date",
                  "No. Days", "Fleet Rank", "Flt. Pct. Rank"),
     rownames = F,
     filter = "top",
@@ -50,5 +51,5 @@ vacation_award_join %>%
       #    scrollY="100vh",
       scrollCollapse = FALSE
     ),
-    caption = "2023-2024 NJASAP Vacation Award") %>% 
-  formatPercentage(9, digits = 1)
+    caption = "2024-2025 NJASAP Vacation Award") %>% 
+  formatPercentage(8, digits = 1)
